@@ -24,6 +24,10 @@ defineProps<{
         <span>@{{ event.time }} on {{ event.date }}</span>
     </div>
  </div>
+ <!-- <div class="eventDetails">
+    <h2>{{ event.category }}</h2>
+    <p>{{ event.organizer }}</p>
+ </div> -->
 </template>
 
 <style scoped>
@@ -38,4 +42,5 @@ defineProps<{
     transform: scale(1.01);
     box-shadow: 0 3px 12px 0 rgba(0,0,0,0.2);
 }
+
 </style>
