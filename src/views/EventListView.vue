@@ -8,7 +8,7 @@ const events = ref<Event[]>(null)
 
 onMounted(() =>{
   axios
-  .get('[https://my-json-server.typicode.com/BaiyorNonlanee/se331-lab02_2]')
+  .get('https://my-json-server.typicode.com/BaiyorNonlanee/se331-lab02_2')
   .then((response) =>{
     events.value = response.data
   })
