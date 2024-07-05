@@ -24,21 +24,21 @@ defineProps<{
         <span>@{{ event.time }} on {{ event.date }}</span>
     </div>
  </div>
- <!-- <div class="eventDetails">
+ <div class="eventDetails">
     <h2>{{ event.category }}</h2>
     <p>{{ event.organizer }}</p>
- </div> -->
+ </div>
 </template>
 
 <style scoped>
-.event-card{
+.event-card, .eventDetails{
     padding: 20px;
     width: 250px;
     cursor: pointer;
     border: 1px solid #39495c;
     margin-bottom: 18px;
 }
-.event-card:hover{
+.event-card:hover, .eventDetails:hover{
     transform: scale(1.01);
     box-shadow: 0 3px 12px 0 rgba(0,0,0,0.2);
 }
