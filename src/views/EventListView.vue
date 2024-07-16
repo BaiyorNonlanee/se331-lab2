@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import EventCard from '@/components/EventCard.vue'
 import Event from '@types/Event'
-import { ref,watchEffect } from 'vue'
+import { computed, ref,watchEffect } from 'vue'
 import EventService from '@/services/EventService.ts'
 import type { AxiosResponse } from 'axios';
 
 const events = ref<Event[]>(null)
 
+const totalEvent = ref<number>(0)
 const props = defineProps({
   page:{
     type: Number,
@@ -19,7 +20,13 @@ EventService.getEvents(2,props.page).then((response: AxiosResponse<EventItem[]>)
 watchEffect(() =>{
   EventService.getEvents(2,props.page).then((response: AxiosResponse<EventItem[]>) =>{
   events.value = response.data
+  totalEvent.value = response.headers['x-total-count']
 })
+})
+const hasNextPage = computed(() =>{
+  // first calculate the total page
+  const totalPages = Math.ceil(totalEvent.value/2)
+  return props.page.valueOf() < totalPages
 })
 </script>
 
@@ -31,7 +38,7 @@ watchEffect(() =>{
     <RouterLink :to="{name: 'event-list-view', query: {page: page - 1}}" rel="prev" v-if="page != 1">
       Prev Page
     </RouterLink>
-    <RouterLink :to="{name: 'event-list-view', query: {page: page + 1}}" rel="next" v-if="page + 1">
+    <RouterLink :to="{name: 'event-list-view', query: {page: page + 1}}" rel="next" v-if="hasNextPage">
       Next Page
     </RouterLink>
   </div>
