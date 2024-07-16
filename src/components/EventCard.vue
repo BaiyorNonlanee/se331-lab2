@@ -15,10 +15,10 @@ defineProps<{
         </div>
     </div>
 </RouterLink>
- <div class="eventDetails">
+ <!-- <div class="eventDetails">
     <h2>{{ event.category }}</h2>
     <p>{{ event.organizer }}</p>
- </div>
+ </div> -->
 </template>
 
 <style scoped>
