@@ -1,4 +1,4 @@
-import axios, { type AxiosResponse } from "axios"
+import axios from "axios"
 
 const apiClient = axios.create({
     baseURL: 'https://dv-student-backend-2019.appspot.com/',
@@ -10,11 +10,7 @@ const apiClient = axios.create({
 })
 
 export default{
-    getEvent(): Promise<AxiosResponse<EventItem[]>>{
-        return apiClient.get<EventItem[]>('/events')
-
-    },
-    getEventById(id:number):Promise<AxiosResponse<EventItem>>{
-        return apiClient.get<EventItem>('events/'+id.toString())
+    getEvents() {
+        return apiClient.get('/students')
     }
 }
