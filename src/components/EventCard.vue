@@ -7,13 +7,7 @@ defineProps<{
 </script>
 
 <template>
- <!-- <div class="event-class">
-    <div class="event-card">
-        <h2>{{ event.title }}</h2>
-        <span>@{{ event.time }} on {{ event.date }}</span>
-    </div>
- </div> -->
- <RouterLink to="/event/123">
+ <RouterLink :to="{name: 'event-detail'}">
     <div class="event-class">
         <div class="event-card">
             <span>@{{ event?.time }} on {{ event?.date }}</span>
