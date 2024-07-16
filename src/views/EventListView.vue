@@ -23,6 +23,12 @@ EventService.getEvents(2,props.page).then((response: AxiosResponse<EventItem[]>)
  
   <div class="events">
     <EventCard v-for="event in events" :key="event.id" :event="event"/>
+    <RouterLink :to="{name: 'event-list-view', query: {page: page - 1}}" rel="prev" v-if="page != 1">
+      Prev Page
+    </RouterLink>
+    <RouterLink :to="{name: 'event-list-view', query: {page: page + 1}}" rel="next" v-if="page + 1">
+      Next Page
+    </RouterLink>
   </div>
 </template>
 
