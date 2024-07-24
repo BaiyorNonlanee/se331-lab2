@@ -20,7 +20,6 @@ const edit = () => {
 }
 </script>
 <template>
- 
         <p>Edit event here</p>
         <button @click="edit">Edit</button>
 </template>
