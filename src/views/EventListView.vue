@@ -1,19 +1,17 @@
 <script setup lang="ts">
 import EventCard from '@/components/EventCard.vue'
-import Event from '@types/Event'
-import { computed, ref,watchEffect } from 'vue'
+import {type Event} from '@/types'
 import { useRoute, RouterLink } from 'vue-router'
-import EventService from '@/services/EventService.ts'
-import type { AxiosResponse } from 'axios';
+// import type { AxiosResponse } from 'axios';
+import {ref, onMounted, computed, watchEffect } from 'vue'
+import EventService from '@/services/EventService'
+
 
 const events = ref<Event[]>(null)
-
-const totalEvent = ref<number>(0)
+const totalEvents = ref<number>(0)
 
 //2.9
 const route = useRoute()
-
-const page = computed(() => parseInt(route.query.page as string) || 1)
 const pageSize = computed(() => parseInt(route.query.size as string) || 2)
 
 const props = defineProps({
@@ -22,30 +20,39 @@ const props = defineProps({
     required: true
   }
 })
-EventService.getEvents(2,props.page).then((response: AxiosResponse<EventItem[]>) =>{
-  events.value = response.data
-})
-// watchEffect(() =>{
-//   EventService.getEvents(2,props.page).then((response: AxiosResponse<EventItem[]>) =>{
-//   events.value = response.data
-//   totalEvent.value = response.headers['x-total-count']
+const page = computed(() => props.page)
+// onMounted(() => {
+//   watchEffect(() => {
+//     events.value = null
+//     EventService.getEvents(2, page.value)
+//     .then((response) =>{
+//       events.value = response.data
+//       totalEvents.value = response.headers['x-total-count']
+//     })
+//     .catch((error) =>{
+//       console.error('There was an error!',error)
+//     })
+//   })
 // })
-// })
-
-const fetchEvents = () => {
-    EventService.getEvents(pageSize.value, page.value).then((response: AxiosResponse<EventItem[]>) => {
-        events.value = response.data
-        totalEvent.value = parseInt(response.headers['x-total-count'])
-    })
-}
-
 watchEffect(() => {
-    fetchEvents()
+  // Reset events to prevent stale data
+  events.value = []
+  
+  // Fetch events based on page size and current page
+  EventService.getEvents(pageSize.value, page.value)
+    .then((response) => {
+      events.value = response.data
+      totalEvents.value = response.headers['x-total-count']
+    })
+    .catch((error) => {
+      console.error('There was an error!', error)
+    })
 })
+
 const hasNextPage = computed(() =>{
   // first calculate the total page
-  const totalPages = Math.ceil(totalEvent.value)
-  return props.page.valueOf() < totalPages
+  const totalPages = Math.ceil(totalEvents.value/pageSize.value)
+  return page.value < totalPages
 })
 </script>
 
@@ -58,11 +65,11 @@ const hasNextPage = computed(() =>{
 
   <div class="pagination">
    
-    <RouterLink :to="{name: 'event-list-view', query: {page: page - 1,size: pageSize}}" rel="prev" v-if="page != 1" id="page-prev">
-      Prev Page
+    <RouterLink :to="{name: 'event-list-view', query: {page: page - 1, size: pageSize}}" rel="prev" v-if="page != 1" id="page-prev">
+      &#60; Prev Page
     </RouterLink>
-    <RouterLink :to="{name: 'event-list-view', query: {page: page + 1,size: pageSize}}" rel="next" v-if="hasNextPage" id="page-next">
-      Next Page
+    <RouterLink :to="{name: 'event-list-view', query: {page: page + 1, size: pageSize}}" rel="next" v-if="hasNextPage" id="page-next">
+      Next Page &#62;
     </RouterLink>
   </div>
 </div>
