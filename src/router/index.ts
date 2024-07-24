@@ -10,7 +10,8 @@ import NotFoundView from '@/views/NotFoundView.vue'
 import NetWorkErrorView from '@/views/NetworkErrorView.vue'
 import nProgress from 'nprogress'
 import EventService from '@/services/EventService'
-import { error } from 'console'
+import { useEventStore } from '@/stores/event'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -57,9 +58,11 @@ const router = createRouter({
       props: true,
       beforeEnter: (to) =>{
         const id = parseInt(to.params.id as string)
+        const eventStore = useEventStore()
         return EventService.getEvent(id)
         .then((response) => {
           // need to setup the data for the event
+          eventStore.setEvent(response.data)
         }).catch((error) => {
           if(error.response && error.response.status === 404){
             return{
