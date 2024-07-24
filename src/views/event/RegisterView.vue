@@ -3,7 +3,6 @@ import {toRefs} from 'vue'
 import {type Event} from '@/types'
 import { useRouter } from 'vue-router';
 import { useMessageStore } from '@/stores/message';
-// import { error } from 'console';
 
 const props = defineProps<{
     event: Event
