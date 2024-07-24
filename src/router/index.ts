@@ -8,6 +8,7 @@ import RegisterView from '@/views/event/RegisterView.vue'
 import LayoutView from '@/views/event/LayoutView.vue'
 import NotFoundView from '@/views/NotFoundView.vue'
 import NetWorkErrorView from '@/views/NetworkErrorView.vue'
+import nProgress from 'nprogress'
 
 
 const router = createRouter({
@@ -93,6 +94,12 @@ const router = createRouter({
     
   ]
   
+})
+router.beforeEach(() => {
+  nProgress.start()
+})
+router.afterEach(() => {
+  nProgress.done()
 })
 
 export default router

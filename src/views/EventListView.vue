@@ -4,7 +4,6 @@ import {type Event} from '@/types'
 import { useRoute, RouterLink } from 'vue-router'
 import {ref, onMounted, computed, watchEffect } from 'vue'
 import EventService from '@/services/EventService'
-import nProgress from 'nprogress'
 
 const events = ref<Event[]>(null)
 const totalEvents = ref<number>(0)
@@ -38,7 +37,7 @@ watchEffect(() => {
   events.value = []
   
   // Fetch events based on page size and current page
-  nProgress.start()
+
   EventService.getEvents(pageSize.value, page.value)
     .then((response) => {
       events.value = response.data
@@ -46,9 +45,6 @@ watchEffect(() => {
     })
     .catch((error) => {
       console.error('There was an error!', error)
-    })
-    .finally(() => {
-      nProgress.done()
     })
 })
 
