@@ -10,7 +10,7 @@ const totalEvents = ref<number>(0)
 
 //2.9
 const route = useRoute()
-const pageSize = computed(() => parseInt(route.query.size as string) || 3)
+const pageSize = computed(() => parseInt(route.query.size as string) || 2)
 
 const props = defineProps({
   page:{
