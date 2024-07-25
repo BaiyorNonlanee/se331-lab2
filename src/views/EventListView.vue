@@ -10,7 +10,7 @@ const totalEvents = ref<number>(0)
 
 //2.9
 const route = useRoute()
-const pageSize = computed(() => parseInt(route.query.size as string) || 2)
+const pageSize = computed(() => parseInt(route.query.size as string) || 3)
 
 const props = defineProps({
   page:{
@@ -35,6 +35,19 @@ watchEffect(() => {
       console.error('There was an error!', error)
     })
 })
+
+// onMounted(() => {
+//   watchEffect(() => {
+//     EventService.getEvents(6, page.value)
+//     .then((response) =>{
+//       events.value = response.data
+//       totalEvents.value = response.headers['x-total-count']
+//     })
+//     .catch((error) =>{
+//       console.error('There was an error!',error)
+//     })
+//   })
+// })
 
 const hasNextPage = computed(() =>{
   // first calculate the total page
