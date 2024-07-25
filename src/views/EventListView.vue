@@ -19,19 +19,7 @@ const props = defineProps({
   }
 })
 const page = computed(() => props.page)
-// onMounted(() => {
-//   watchEffect(() => {
-//     events.value = null
-//     EventService.getEvents(2, page.value)
-//     .then((response) =>{
-//       events.value = response.data
-//       totalEvents.value = response.headers['x-total-count']
-//     })
-//     .catch((error) =>{
-//       console.error('There was an error!',error)
-//     })
-//   })
-// })
+
 watchEffect(() => {
   // Reset events to prevent stale data
   events.value = []
