@@ -27,7 +27,7 @@ const {message} = storeToRefs(store)
  </div>
 </template>
 
-<style>
+<!-- <style>
 nav{
   padding: 30px;
 }
@@ -52,4 +52,4 @@ h2{
 #flashMessage{
   animation: yellofade 3s ease-in-out;
 }
-</style>
+</style> -->

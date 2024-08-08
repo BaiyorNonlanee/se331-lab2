@@ -8,14 +8,14 @@ defineProps<{
 
 <template>
     <div class="student-class">
-       <div class="student-card">
+       <div class="cursor-pointer border border-gray-600 p-[20px] w-[250px] mb-[18px] hover:scale-101 hover:shadow-sp">
            <h2>{{ student.name }} {{ student.surname }}</h2>
            <p>{{ student.gpa }}</p>
        </div>
     </div>
    </template>
 
-<style scoped>
+<!-- <style scoped>
 .student-card{
     padding: 20px;
     width: 250px;
@@ -28,4 +28,4 @@ defineProps<{
     box-shadow: 0 3px 12px 0 rgba(0,0,0,0.2);
 }
 
-</style>
+</style> -->
