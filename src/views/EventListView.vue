@@ -5,7 +5,8 @@ import { useRoute, RouterLink } from 'vue-router'
 import {ref, onMounted, computed, watchEffect } from 'vue'
 import EventService from '@/services/EventService'
 
-const events = ref<Event[]>([])
+const events = ref<Event[] | null>(null)
+
 const totalEvents = ref<number>(0)
 
 //2.9
