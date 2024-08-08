@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import {ref} from 'vue'
-import Student from '@/types/Student'
+import type { Student } from '@/types'
 defineProps<{
     student: Student
 }>()
