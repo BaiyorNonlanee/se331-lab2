@@ -9,7 +9,7 @@ const {message} = storeToRefs(store)
 <template>
  <div id="layout">
   <header>
-    <div class="flashMessage" v-if="message">
+    <div id="flashMessage" v-if="message">
       <h4>{{ message }}</h4>
     </div>
     <div class="wrapper">
@@ -48,7 +48,7 @@ nav a.router-link-exact-active{
 h2{
   font-size: 20px
 }
-@keyframes yellowfade{
+@keyframes yellofade{
   from{
     background-color: yellow;
   }
@@ -57,6 +57,6 @@ h2{
   }
 }
 #flashMessage{
-  animation: yellowfade 3s ease-in-out;
+  animation: yellofade 3s ease-in-out;
 }
 </style>
